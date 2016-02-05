@@ -1,0 +1,22 @@
+{
+  "name": "qwant50/config",
+  "description": "Config component.",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Sergey Malahov",
+      "email": "qwantonline@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Qwant\\": "src/",
+      "Qwant\\Tests\\": "src/tests/"
+    }
+  },
+  "license": "MIT"
+}

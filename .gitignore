@@ -1,0 +1,5 @@
+/src/Mailer/config/mailerConfig.php
+/vendor/
+/.idea/
+composer.lock
+
