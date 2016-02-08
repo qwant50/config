@@ -16,9 +16,9 @@ $loader = require __DIR__ . '/vendor/autoload.php';
 
 // Usage example
 $configObj = new Config(__DIR__.'/src/configs');
-$configObj->setConfigFile( 'mailer.php');
-var_dump($componentConfig = $configObj->loadConfig());
+$configObj->setConfigFile( 'componentConfigFileName.php');
+$componentConfig = $configObj->loadConfig();
 $componentConfig = 256;
-//$configObj->saveConfig($componentConfig);
+$configObj->saveConfig($componentConfig);
 
 
