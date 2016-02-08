@@ -2,6 +2,7 @@
   "name": "qwant50/config",
   "description": "ITCourses framework config component",
   "type": "library",
+
   "authors": [
     {
       "name": "Sergey Malahov",

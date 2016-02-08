@@ -16,7 +16,6 @@ class Config
     {
         $this->basePath = rtrim($basePath, '/') . '/';
         $this->basePath .= (getenv('APP_ENV')) ? 'development/' : 'production/';
-        echo $this->basePath;
     }
 
     /**
