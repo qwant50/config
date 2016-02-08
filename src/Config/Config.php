@@ -28,7 +28,8 @@ class Config
 
     /**
      * @param string $configFile
-     * @return array
+     * @return mixed
+     * @throws \Exception
      */
     public function loadConfig($configFile = null)
     {
@@ -38,6 +39,9 @@ class Config
         $path = $this->basePath . $configFile;
         if (is_file($path) && is_readable($path)) {
             return include $path;
+        }
+        else {
+            throw new \Exception('Config file ' . $path . ' not found.');
         }
     }
 
