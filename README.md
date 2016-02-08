@@ -28,18 +28,20 @@ to the require section of your composer.json.
 ## Usage
 
 ```php
+$componentConfig = [];
 $configObj = new Config(ROOT . '/src/configs');
 $configObj->setConfigFile( 'componentConfigFileName.php');
-$componentConfig = $configObj->loadConfig();
-$componentConfig = 256;
+$componentConfig['section'] = $configObj->loadConfig();
+$componentConfig['section'] = 256;
 $configObj->saveConfig($componentConfig);
 ```
 
 ###or
 
 ```php
+$componentConfig = [];
 $configObj = new Config(ROOT . '/src/configs');
-$componentConfig = $configObj->loadConfig(componentConfigFileName.php);
-$componentConfig = 256;
+$componentConfig['section'] = $configObj->loadConfig(componentConfigFileName.php);
+$componentConfig['section' = 256;
 $configObj->saveConfig($componentConfig);
 ```
