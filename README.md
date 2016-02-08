@@ -13,13 +13,13 @@ The preferred way to install this ITCourses framework config component is throug
 Either run
 
 ```sh
-php composer.phar require "qwant/config"
+php composer.phar require "qwant50/config"
 ```
 
 or add
 
 ```json
-"qwant/config": "~1.*.*"
+"qwant50/config": "~1.*.*"
 ```
 
 to the require section of your composer.json.
