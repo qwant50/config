@@ -1,6 +1,6 @@
 {
   "name": "qwant50/config",
-  "description": "Config component.",
+  "description": "ITCourses framework config component",
   "type": "library",
   "authors": [
     {
