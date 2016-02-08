@@ -25,23 +25,20 @@ or add
 to the require section of your composer.json.
 
 
-## Usage
+##Usage
 
+####get all data 
 ```php
-$componentConfig = [];
-$configObj = new Config(ROOT . '/src/configs');
-$configObj->setConfigFile( 'componentConfigFileName.php');
-$componentConfig['section'] = $configObj->loadConfig();
-$componentConfig['section'] = 256;
-$configObj->saveConfig($componentConfig);
+$configObj = new Config('/path/to/configs');
+$componentConfig = $configObj->getData();
 ```
 
-###or
-
+####get component's data
 ```php
-$componentConfig = [];
-$configObj = new Config(ROOT . '/src/configs');
-$componentConfig['section'] = $configObj->loadConfig(componentConfigFileName.php);
-$componentConfig['section' = 256;
-$configObj->saveConfig($componentConfig);
+$configObj = new Config('/path/to/configs');
+$componentConfig = $configObj->getData('componentFileName');
+$componentConfig['key'] = $value;
+$configObj->saveConfig('componentFileName');
 ```
+
+
