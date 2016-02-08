@@ -17,7 +17,7 @@ class Config
     {
         $this->basePath = rtrim($basePath, '/') . '/';
         $this->basePath .= (getenv('APP_ENV')) ? 'development/' : 'production/';
-        if (!is_dir($this->basePath)){
+        if (!is_dir($this->basePath)) {
             throw new \Exception('Configs base path ' . $this->basePath . ' not found.');
         }
         $this->loadConfigs();
@@ -49,13 +49,13 @@ class Config
     }
 
     /**
-     * @param $params
-     * @param string $configFile
+     * @param string $key
+     * @param string|null $configFile
      * @return int
      */
     public function saveConfig($key, $configFile = null)
     {
-        $configFile = strtolower(is_null($configFile) ?  $key . '.php' : $configFile);
+        $configFile = strtolower(is_null($configFile) ? $key . '.php' : $configFile);
 
         $content = "<?php" . PHP_EOL . "return " . var_export($this->getData($key), true) . ";";
         return file_put_contents($this->basePath . $configFile, $content);
@@ -74,7 +74,8 @@ class Config
         }
     }
 
-    public function setData($key, $value){
+    public function setData($key, $value)
+    {
         $this->data[$key] = $value;
     }
 }
