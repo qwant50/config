@@ -1,6 +1,6 @@
 <?php
 
-use Qwant\Config\Config;
+use Qwant\Config;
 
 $loader = require __DIR__ . '/vendor/autoload.php';
 
@@ -12,7 +12,7 @@ $configObj = new Config(__DIR__ . '/src/configs');
 //$configObj->loadConfig('component.php');
 
 //$configObj->loadConfigs();
-//var_dump($configObj->data);
+var_dump($configObj->data);
 //var_export($configObj->getData());
 //echo '<br>';
 //var_export($configObj->getData('component'));

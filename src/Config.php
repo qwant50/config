@@ -1,6 +1,6 @@
 <?php
 
-namespace Qwant\Config;
+namespace Qwant;
 
 
 class Config
