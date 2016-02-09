@@ -9,14 +9,9 @@ ini_set('display_errors', 1);
 
 
 $configObj = new Config(__DIR__ . '/src/configs');
+
+
 //$configObj->loadConfig('component.php');
 
 //$configObj->loadConfigs();
 var_dump($configObj->data);
-//var_export($configObj->getData());
-//echo '<br>';
-//var_export($configObj->getData('component'));
-
-/*$componentConfig['section'] = $configObj->loadConfig();
-$componentConfig['section'] = 256;
-$configObj->saveConfig($componentConfig);*/

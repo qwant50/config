@@ -18,32 +18,54 @@ class Config
         $this->basePath = rtrim($basePath, '/') . '/';
         $this->basePath .= (getenv('APP_ENV')) ? 'development/' : 'production/';
         if (!is_dir($this->basePath)) {
-            throw new \Exception('Configs base path ' . $this->basePath . ' not found.');
+            throw new ConfigException('Configs base path ' . $this->basePath . ' not found.');
         }
         $this->loadConfigs();
     }
 
     /**
-     * @param string $configFile
-     * @return mixed
-     * @throws \Exception
+     * @param string|\SplFileInfo $configFile
+     * @throws ConfigException
      */
     public function loadConfig($configFile)
     {
-        $path = $this->basePath . $configFile;
-        if (is_file($path) && is_readable($path)) {
-            $this->data[substr($configFile, 0, -4)] = include $path;
-        } else {
-            throw new \Exception('Config file ' . $path . ' not found.');
+        if (!$configFile instanceof \SplFileInfo) {
+            if (!is_string($configFile)) {
+                throw new ConfigException('Mismatch type of variable.');
+            }
+            if (!strpos($configFile,'..')){
+                throw new ConfigException('File name: '. $configFile . ' isnt correct.');
+            }
+            $path = realpath($this->basePath . $configFile);
+            if (!is_file($path) || !is_readable($path)) {
+                throw new ConfigException('Config file ' . $path . ' not found of file isnt readable.');
+            }
+            $configFile = new \SplFileInfo($path);
+        }
+        $path = $configFile->getRealPath();
+        $ext = $configFile->getExtension();
+        $key = $configFile->getBasename('.' . $ext);
+
+        if ('php' == $ext) {
+            $this->data[$key] = include $path;
+        } elseif ('ini' == $ext) {
+            $this->data[$key] = parse_ini_file($path, true);
+        }
+        elseif ('yaml' == $ext){
+            if (!function_exists('yaml_parse_file')){
+                throw new ConfigException('Function `yaml_parse_file` isnt supported.
+                http://php.net/manual/en/yaml.requirements.php');
+            }
+            $this->data[$key] = yaml_parse_file($path);
         }
     }
 
     public function loadConfigs()
     {
-        $filesList = array_diff(scandir($this->basePath), ['..', '.']);
-        foreach ($filesList as $file):
-            if (!is_dir($this->basePath . $file)) {
-                $this->loadConfig($file);
+        $filesList = new \FilesystemIterator($this->basePath, \FilesystemIterator::SKIP_DOTS);
+        foreach ($filesList as $fileInfo):
+            if ($fileInfo->isFile()) {
+                $this->loadConfig($fileInfo);
             }
         endforeach;
     }
@@ -67,11 +89,7 @@ class Config
             return $this->data;
         }
         // return part of configuration
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
-        } else {
-            return null;
-        }
+        return (isset($this->data[$key])) ? $this->data[$key] : [];
     }
 
     public function setData($key, $value)
