@@ -37,7 +37,7 @@ $allConfigs = $configObj->getData();
 ```php
 $configObj = new Config('/path/to/configs');
 $componentConfig = $configObj->getData('componentFileName');
-$componentConfig['key'] = $value;
+$componentConfig['componentFileName'][$key] = $value;
 $configObj->saveConfig('componentFileName');
 ```
 

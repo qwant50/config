@@ -24,7 +24,7 @@ class Config
     }
 
     /**
-     * Load config data. Support php|ini|yaml configs formats.
+     * Load config data. Support php|ini|yaml config formats.
      *
      * @param string|\SplFileInfo $configFile
      * @throws ConfigException
