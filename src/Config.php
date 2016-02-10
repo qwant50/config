@@ -11,7 +11,7 @@ class Config
     /**
      * @param string $basePath path to '../configs/' directory
      * getenv('APP_ENV')  gets APP_ENV variable from the httpd.ini file
-     * @throws \Exception
+     * @throws ConfigException
      */
     public function __construct($basePath)
     {
@@ -33,8 +33,8 @@ class Config
             if (!is_string($configFile)) {
                 throw new ConfigException('Mismatch type of variable.');
             }
-            if (!strpos($configFile,'..')){
-                throw new ConfigException('File name: '. $configFile . ' isnt correct.');
+            if (strpos($configFile, '..')) {
+                throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
             }
             $path = realpath($this->basePath . $configFile);
             if (!is_file($path) || !is_readable($path)) {
@@ -50,9 +50,8 @@ class Config
             $this->data[$key] = include $path;
         } elseif ('ini' == $ext) {
             $this->data[$key] = parse_ini_file($path, true);
-        }
-        elseif ('yaml' == $ext){
-            if (!function_exists('yaml_parse_file')){
+        } elseif ('yaml' == $ext) {
+            if (!function_exists('yaml_parse_file')) {
                 throw new ConfigException('Function `yaml_parse_file` isnt supported.
                 http://php.net/manual/en/yaml.requirements.php');
             }
