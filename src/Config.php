@@ -75,7 +75,7 @@ class Config
      *  Save config in php file. Support only this way.
      *
      * @param string $key
-     * @param string|null $configFile  format: fileName.ext
+     * @param string|null $configFile  format: fileName.php
      * @return int
      * @throws ConfigException
      */
