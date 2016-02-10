@@ -10,8 +10,6 @@ ini_set('display_errors', 1);
 
 $configObj = new Config(__DIR__ . '/src/configs');
 
-
 //$configObj->loadConfig('component.php');
-
 //$configObj->loadConfigs();
 var_dump($configObj->data);

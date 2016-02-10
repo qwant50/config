@@ -24,6 +24,8 @@ class Config
     }
 
     /**
+     * Load config data. Support php|ini|yaml configs formats.
+     *
      * @param string|\SplFileInfo $configFile
      * @throws ConfigException
      */
@@ -70,14 +72,19 @@ class Config
     }
 
     /**
+     *  Save config in php file. Support only this way.
+     *
      * @param string $key
-     * @param string|null $configFile
+     * @param string|null $configFile  format: fileName.ext
      * @return int
+     * @throws ConfigException
      */
     public function saveConfig($key, $configFile = null)
     {
+        if (strpos($configFile, '..')) {
+            throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
+        }
         $configFile = strtolower(is_null($configFile) ? $key . '.php' : $configFile);
-
         $content = "<?php" . PHP_EOL . "return " . var_export($this->getData($key), true) . ";";
         return file_put_contents($this->basePath . $configFile, $content);
     }
