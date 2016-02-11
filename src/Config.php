@@ -9,6 +9,9 @@ class Config
     public $data = [];
 
     /**
+     *
+     * Generate $basePath to configs
+     *
      * @param string $basePath path to '../configs/' directory
      * getenv('APP_ENV')  gets APP_ENV variable from the httpd.ini file
      * @throws ConfigException
@@ -24,6 +27,7 @@ class Config
     }
 
     /**
+     *
      * Load config data. Support php|ini|yaml config formats.
      *
      * @param string|\SplFileInfo $configFile
@@ -35,10 +39,10 @@ class Config
             if (!is_string($configFile)) {
                 throw new ConfigException('Mismatch type of variable.');
             }
-            if (strpos($configFile, '..')) {
+            $path = realpath($this->basePath . $configFile);
+            if (strpos($configFile, '..') || (!strpos(realpath($this->basePath . $configFile), realpath($this->basePath)))) {
                 throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
             }
-            $path = realpath($this->basePath . $configFile);
             if (!is_file($path) || !is_readable($path)) {
                 throw new ConfigException('Config file ' . $path . ' not found of file isnt readable.');
             }
