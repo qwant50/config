@@ -12,4 +12,4 @@ $configObj = new Config(__DIR__ . '/src/configs');
 
 //$configObj->loadConfig('component.php');
 //$configObj->loadConfigs();
-var_dump($configObj->data);
+var_dump($configObj->getData());
