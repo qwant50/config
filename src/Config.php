@@ -6,7 +6,7 @@ namespace Qwant;
 class Config
 {
     protected $basePath;
-    public $data = [];
+    private $data = [];
 
     /**
      *
@@ -65,6 +65,11 @@ class Config
         }
     }
 
+    /**
+     *
+     * Load all configs from basePath
+     *
+     */
     public function loadConfigs()
     {
         $filesList = new \FilesystemIterator($this->basePath, \FilesystemIterator::SKIP_DOTS);
@@ -93,6 +98,13 @@ class Config
         return file_put_contents($this->basePath . $configFile, $content);
     }
 
+    /**
+     *
+     * Get config data by key
+     *
+     * @param string|null $key
+     * @return array
+     */
     public function getData($key = null)
     {
         if (is_null($key)) {
@@ -102,6 +114,13 @@ class Config
         return (isset($this->data[$key])) ? $this->data[$key] : [];
     }
 
+    /**
+     *
+     * Set config data by key
+     *
+     * @param $key
+     * @param $value
+     */
     public function setData($key, $value)
     {
         $this->data[$key] = $value;
