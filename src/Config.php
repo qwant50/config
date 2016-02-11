@@ -40,7 +40,7 @@ class Config
                 throw new ConfigException('Mismatch type of variable.');
             }
             $path = realpath($this->basePath . $configFile);
-            if (strpos($configFile, '..') || (!strpos(realpath($this->basePath . $configFile), realpath($this->basePath)))) {
+            if (strpos($configFile, '..') || (!strpos(realpath($path), realpath($this->basePath)))) {
                 throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
             }
             if (!is_file($path) || !is_readable($path)) {
