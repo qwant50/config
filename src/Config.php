@@ -18,8 +18,8 @@ class Config
      */
     public function __construct($basePath)
     {
-        $this->basePath = rtrim($basePath, '/') . '/';
-        $this->basePath .= (getenv('APP_ENV')) ? 'development/' : 'production/';
+        $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $this->basePath .= ((getenv('APP_ENV')) ? 'development' : 'production') . DIRECTORY_SEPARATOR;
         if (!is_dir($this->basePath)) {
             throw new ConfigException('Configs base path ' . $this->basePath . ' not found.');
         }
@@ -40,11 +40,12 @@ class Config
                 throw new ConfigException('Mismatch type of variable.');
             }
             $path = realpath($this->basePath . $configFile);
+            // check basePath at mutation
             if (strpos($configFile, '..') || (!strpos(realpath($path), realpath($this->basePath)))) {
                 throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
             }
             if (!is_file($path) || !is_readable($path)) {
-                throw new ConfigException('Config file ' . $path . ' not found of file isnt readable.');
+                throw new ConfigException('Config file: ' . $path . ' not found of file isnt readable.');
             }
             $configFile = new \SplFileInfo($path);
         }
@@ -81,10 +82,10 @@ class Config
     }
 
     /**
-     *  Save config in php file. Support only this way.
+     *  Save config in '.php' file. Support only this way.
      *
      * @param string $key
-     * @param string|null $configFile  format: fileName.php
+     * @param string|null $configFile format: fileName.php
      * @return int
      * @throws ConfigException
      */
