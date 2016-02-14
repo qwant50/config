@@ -5,11 +5,10 @@ namespace Qwant;
 
 class Config
 {
-    protected $basePath;
+    private $basePath;
     private $data = [];
 
     /**
-     *
      * Generate $basePath to configs
      *
      * @param string $basePath path to '../configs/' directory
@@ -27,7 +26,6 @@ class Config
     }
 
     /**
-     *
      * Load config data. Support php|ini|yaml config formats.
      *
      * @param string|\SplFileInfo $configFile
@@ -42,10 +40,10 @@ class Config
             $path = realpath($this->basePath . $configFile);
             // check basePath at mutation
             if (strpos($configFile, '..') || (!strpos($path, realpath($this->basePath)))) {
-                throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
+                throw new ConfigException('Config file name: ' . $configFile . ' isn\'t correct.');
             }
             if (!is_file($path) || !is_readable($path)) {
-                throw new ConfigException('Config file: ' . $path . ' not found of file isnt readable.');
+                throw new ConfigException('Config file: ' . $path . ' not found of file isn\'t readable.');
             }
             $configFile = new \SplFileInfo($path);
         }
@@ -59,15 +57,14 @@ class Config
             $this->data[$key] = parse_ini_file($path, true);
         } elseif ('yaml' == $ext) {
             if (!function_exists('yaml_parse_file')) {
-                throw new ConfigException('Function `yaml_parse_file` isnt supported.
-                http://php.net/manual/en/yaml.requirements.php');
+                throw new ConfigException("Function `yaml_parse_file` isn't supported.\n" .
+                    'http://php.net/manual/en/yaml.requirements.php');
             }
             $this->data[$key] = yaml_parse_file($path);
         }
     }
 
     /**
-     *
      * Load all configs from basePath
      *
      */
@@ -92,7 +89,7 @@ class Config
     public function saveConfig($key, $configFile = null)
     {
         if (strpos($configFile, '..')) {
-            throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
+            throw new ConfigException('File name: ' . $configFile . ' isn\'t correct.');
         }
         $configFile = is_null($configFile) ? $key . '.php' : $configFile;
         $content = "<?php" . PHP_EOL . "return " . var_export($this->getData($key), true) . ";";
@@ -100,7 +97,6 @@ class Config
     }
 
     /**
-     *
      * Get config data by key
      *
      * @param string|null $key
@@ -116,7 +112,6 @@ class Config
     }
 
     /**
-     *
      * Set config data by key
      *
      * @param $key
