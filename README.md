@@ -37,6 +37,7 @@ $allConfigs = $config->getData();
 ```php
 $config = new Config('/path/to/configs');
 $data = $config->getData($fullFileName);
+var_dump($config->getBasePath());
 var_dump($data);
 ```
 
