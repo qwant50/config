@@ -37,7 +37,7 @@ $allConfigs = $config->getData();
 ```php
 $config = new Config('/path/to/configs');
 $data = $config->getData($fullFileName);
-$data[$key] = $value;
+var_dump($data);
 ```
 
 ####save config (support only '.php' file)  
