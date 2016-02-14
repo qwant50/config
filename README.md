@@ -19,7 +19,7 @@ php composer.phar require "qwant50/config"
 or add
 
 ```json
-"qwant50/config": "~2.*.*"
+"qwant50/config": "~3.*.*"
 ```
 
 to the require section of your composer.json.
@@ -27,18 +27,28 @@ to the require section of your composer.json.
 
 ##Usage
 
-####get all data 
+####get all data (php | ini | yaml formats)
 ```php
-$configObj = new Config('/path/to/configs');
-$allConfigs = $configObj->getData();
+$config = new Config('/path/to/configs');
+$allConfigs = $config->getData();
 ```
 
 ####get component's data
 ```php
-$configObj = new Config('/path/to/configs');
-$componentConfig = $configObj->getData('componentFileName');
-$componentConfig['componentFileName'][$key] = $value;
-$configObj->saveConfig('componentFileName');
+$config = new Config('/path/to/configs');
+$data = $config->getData($fullFileName);
+$data[$key] = $value;
 ```
+
+####save config (support only '.php' file)  
+````php
+$config->saveConfig($key);
+````
+
+or
+
+````php
+$config->saveConfig($key, fullFileName);
+````
 
 

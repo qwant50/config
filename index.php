@@ -8,8 +8,8 @@ error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 
 
-$configObj = new Config(__DIR__ . '/src/configs');
+$config = new Config(__DIR__ . '/src/configs');
 
 //$configObj->loadConfig('component.php');
 //$configObj->loadConfigs();
-var_dump($configObj->getData());
+var_dump($config->getData());

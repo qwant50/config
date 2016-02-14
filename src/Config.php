@@ -41,7 +41,7 @@ class Config
             }
             $path = realpath($this->basePath . $configFile);
             // check basePath at mutation
-            if (strpos($configFile, '..') || (!strpos(realpath($path), realpath($this->basePath)))) {
+            if (strpos($configFile, '..') || (!strpos($path, realpath($this->basePath)))) {
                 throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
             }
             if (!is_file($path) || !is_readable($path)) {
@@ -94,7 +94,7 @@ class Config
         if (strpos($configFile, '..')) {
             throw new ConfigException('File name: ' . $configFile . ' isnt correct.');
         }
-        $configFile = strtolower(is_null($configFile) ? $key . '.php' : $configFile);
+        $configFile = is_null($configFile) ? $key . '.php' : $configFile;
         $content = "<?php" . PHP_EOL . "return " . var_export($this->getData($key), true) . ";";
         return file_put_contents($this->basePath . $configFile, $content);
     }
@@ -125,5 +125,15 @@ class Config
     public function setData($key, $value)
     {
         $this->data[$key] = $value;
+    }
+
+    /**
+     * Return basePath
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return $this->basePath;
     }
 }
