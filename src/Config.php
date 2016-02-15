@@ -2,7 +2,11 @@
 
 namespace Qwant;
 
-
+/**
+ * Class Config
+ * @package Qwant
+ * @author   Sergey Malahov
+ */
 class Config
 {
     private $basePath;
@@ -26,7 +30,7 @@ class Config
     }
 
     /**
-     * Load config data. Support php|ini|yaml config formats.
+     * Load config data. Support php|ini|yml config formats.
      *
      * @param string|\SplFileInfo $configFile
      * @throws ConfigException
@@ -55,7 +59,7 @@ class Config
             $this->data[$key] = include $path;
         } elseif ('ini' == $ext) {
             $this->data[$key] = parse_ini_file($path, true);
-        } elseif ('yaml' == $ext) {
+        } elseif ('yml' == $ext) {
             if (!function_exists('yaml_parse_file')) {
                 throw new ConfigException("Function `yaml_parse_file` isn't supported.\n" .
                     'http://php.net/manual/en/yaml.requirements.php');
