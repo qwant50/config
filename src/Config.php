@@ -55,11 +55,11 @@ class Config
         $ext = $configFile->getExtension();
         $key = $configFile->getBasename('.' . $ext);
 
-        if ('php' == $ext) {
+        if ('php' === $ext) {
             $this->data[$key] = include $path;
-        } elseif ('ini' == $ext) {
+        } elseif ('ini' === $ext) {
             $this->data[$key] = parse_ini_file($path, true);
-        } elseif ('yml' == $ext) {
+        } elseif ('yml' === $ext) {
             if (!function_exists('yaml_parse_file')) {
                 throw new ConfigException("Function `yaml_parse_file` isn't supported.\n" .
                     'http://php.net/manual/en/yaml.requirements.php');
