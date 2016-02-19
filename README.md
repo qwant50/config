@@ -27,7 +27,7 @@ to the require section of your composer.json.
 
 ##Usage
 
-####get all data (php | ini | yaml formats)
+####get all data (php | ini | yaml formats). Result file name to config file must be /path/to/config/development or /path/to/config/production
 ```php
 $config = new Config('/path/to/configs');
 $allConfigs = $config->getData();
@@ -41,7 +41,7 @@ var_dump($config->getBasePath());
 var_dump($data);
 ```
 
-####save config (support only '.php' file)  
+####save configuration data into a file with `$key` filename (support only '.php' file)  
 ````php
 $config->saveConfig($key);
 ````
