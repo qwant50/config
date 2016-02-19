@@ -41,15 +41,17 @@ var_dump($config->getBasePath());
 var_dump($data);
 ```
 
-####save configuration data into a file with `$key` filename (support only '.php' file)  
+####save configuration data (support only '.php' file)
+
+into a file with `$key` filename  
 ````php
 $config->saveConfig($key);
 ````
 
-or
+or into a file with `$fullFileName` where `$fullFileName` it's a fileName + .php as extension
 
 ````php
-$config->saveConfig($key, fullFileName);
+$config->saveConfig($key, $fullFileName);
 ````
 
 
