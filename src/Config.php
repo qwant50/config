@@ -22,7 +22,7 @@ class Config
     public function __construct($basePath)
     {
         $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        $this->basePath .= ((getenv('APP_ENV')) ? 'development' : 'production') . DIRECTORY_SEPARATOR;
+        $this->basePath .= (getenv('APP_ENV') ? 'development' : 'production') . DIRECTORY_SEPARATOR;
         if (!is_dir($this->basePath)) {
             throw new ConfigException('Configs base path ' . $this->basePath . ' not found.');
         }
