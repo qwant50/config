@@ -92,7 +92,7 @@ class Config
      */
     public function saveConfig($key, $configFile = null)
     {
-        $configFile = $configFile ? : $key . '.php';
+        $configFile = $configFile ?: $key . '.php';
         if (strpos($configFile, '..')) {
             throw new ConfigException('File name: ' . $configFile . ' isn\'t correct.');
         }

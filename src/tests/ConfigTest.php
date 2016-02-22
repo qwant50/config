@@ -4,34 +4,37 @@ use Qwant\Config;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
+
+    public $conf;
+
+    public  function setUp(){
+        $this->conf = new Config(dirname(dirname(__DIR__)) . '/src/tests');
+    }
+
     public function testLoadAllConfigsIni()
     {
-        $config = new Config(dirname(dirname(__DIR__)) . '/src/tests');
-        $data = $config->getData();
+        $data = $this->conf->getData();
         $this->AssertTrue(isset($data['file']));
     }
 
     public function testLoadAllConfigsPhp()
     {
-        $config = new Config(dirname(dirname(__DIR__)) . '/src/tests');
-        $data = $config->getData();
+        $data = $this->conf->getData();
         $this->AssertTrue(isset($data['testFile']));
     }
 
     public function testSaveConfigPhp()
     {
-        $config = new Config(dirname(dirname(__DIR__)) . '/src/tests');
         $testFileName = 'newFile.php';
-        if (is_file($config->getBasePath() . $testFileName)) {
-            unlink($config->getBasePath() . $testFileName);
+        if (is_file($this->conf->getBasePath() . $testFileName)) {
+            unlink($this->conf->getBasePath() . $testFileName);
         }
-        $config->saveConfig('testFile', $testFileName);
-        $this->AssertFileExists($config->getBasePath() . $testFileName);
+        $this->conf->saveConfig('testFile', $testFileName);
+        $this->AssertFileExists($this->conf->getBasePath() . $testFileName);
     }
 
     public function testGetDataPhp()
     {
-        $config = new Config(dirname(dirname(__DIR__)) . '/src/tests');
-        $this->AssertEquals('value1', $config->getData('testFile')['key1']);
+        $this->AssertEquals('value1', $this->conf->getData('testFile')['key1']);
     }
 }
