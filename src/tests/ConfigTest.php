@@ -7,7 +7,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public $conf;
 
-    public  function setUp(){
+    public function setUp()
+    {
         $this->conf = new Config(dirname(dirname(__DIR__)) . '/src/tests');
     }
 
@@ -36,5 +37,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetDataPhp()
     {
         $this->AssertEquals('value1', $this->conf->getData('testFile')['key1']);
+    }
+
+    public function testSomthing()
+    {
+        $this->expectException(InvalidArgumentException::class);
     }
 }

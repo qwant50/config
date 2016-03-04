@@ -1,5 +1,5 @@
 
-ITCourses framework config component README
+Jazz framework config component README
 ============
 
 **ITCourses framework config component**
