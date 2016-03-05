@@ -1,5 +1,7 @@
 <?php
 
+namespace Qwant\Tests;
+
 use Qwant\Config;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
